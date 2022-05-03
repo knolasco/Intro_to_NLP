@@ -1,0 +1,17 @@
+% start S
+# Grammar Rules
+S[SEM = ?subj(?vp)] -> NP[SEM=?subj] VP[SEM=?vp]
+NP[SEM=?dt(?jj, ?jj, ?nnp)] -> DT[SEM=?dt] JJ[SEM=?jj] JJ[SEM=?jj] NNP[SEM=?nnp]
+NP[SEM=?jj(?nn, ?nn)] -> JJ[SEM=?jj] NN[SEM=?nn] NN[SEM=?nn]
+VP[SEM=?vbz(?pp, ?np)] -> VBZ[SEM=?vbz] PP[SEM=?pp] NP[SEM=?np]
+PP[SEM=?dt] -> IN DT[SEM=?dt]
+# Lexical Rules
+DT[SEM=<\P Q R S.(exists x.((R(x) & P(x) & Q(x)) -> (S)))>] -> 'The'
+JJ[SEM=<\x.little(x)>] -> 'little'
+JJ[SEM=<\x.yellow(x)>] -> 'yellow'
+NNP[SEM=<\x.Tulip(x)>] -> 'Tulip'
+VBZ[SEM=<\P.(P & lives(x, y))>] -> 'lives'
+IN[+in] -> 'in'
+DT[SEM=<\P Q R.(exists y.(R(y) & P(y) & Q(y)))>] -> 'a'
+NN[SEM=<\x.dark(x)>] -> 'dark'
+NN[SEM=<\x.House(x)>] -> 'house'
