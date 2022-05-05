@@ -9,18 +9,22 @@ import re
 
 DATA_PATH = 'CNN_Articels_clean'
 
-# load data
-articles = pd.read_csv(os.path.join(DATA_PATH, 'CNN_Articels_clean.csv'))
-
-# extract year
-articles['Year'] = pd.to_datetime(articles['Date published'], format = '%Y-%m-%d %H:%M:%S').dt.year
-
-# clean article text
 def clean_text(text):
     text = text.translate(str.maketrans('', '', string.punctuation))
     text = re.sub(r'[0-9]+', 'number', text)
     text = text.lower().split()
     return text
 
-articles['text_cleaned'] = articles['Article text'].apply(clean_text)
-print(articles.iloc[0]['text_cleaned'])
+class DataManager:
+    
+    def __init__(self):
+        self.DATA_PATH = 'CNN_Articels_clean_2'
+
+    def load_data(self):
+        self.data = pd.read_csv(os.path.join(self.DATA_PATH, 'CNN_Articels_clean.csv'))
+
+    def extract_year(self):
+        self.data['Year'] = pd.to_datetime(self.data['Date published'], format = '%Y-%m-%d %H:%M:%S').dt.year
+    
+    def clean_article_text(self):
+        self.data['article_text_screen'] = self.data['Article text'].apply(clean_text)
