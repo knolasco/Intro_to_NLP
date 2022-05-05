@@ -10,9 +10,13 @@ import re
 DATA_PATH = 'CNN_Articels_clean'
 
 def clean_text(text):
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    text = re.sub(r'[0-9]+', 'number', text)
-    text = text.lower().split()
+    if type(text) == str:
+        text = text.replace('CNN', '')
+        text = text.translate(str.maketrans('', '', string.punctuation))
+        text = re.sub(r'[0-9]+', 'number', text)
+        text = text.lower().split()
+    else:
+        text = ''
     return text
 
 class DataManager:
@@ -27,4 +31,7 @@ class DataManager:
         self.data['Year'] = pd.to_datetime(self.data['Date published'], format = '%Y-%m-%d %H:%M:%S').dt.year
     
     def clean_article_text(self):
-        self.data['article_text_screen'] = self.data['Article text'].apply(clean_text)
+        self.data['article_text_clean'] = self.data['Article text'].apply(clean_text)
+
+    def filter_cols(self):
+        self.data = self.data[['Headline', 'Category', 'Article text', 'Year', 'article_text_clean']]
