@@ -20,10 +20,14 @@ def clean_text(text):
     return text
 
 def clean_sents(text):
+    remove = string.punctuation
+    remove = remove.replace(".", "") # don't remove hyphens
+    pattern = r"[{}]".format(remove)
     if type(text) == str:
         text = text.replace('CNN', '')
         text = re.sub(r'[0-9]+', 'number', text)
-        text = text.split('.')
+        text = re.sub(pattern, '', text)
+        text = text.split(separator = '.')
     else:
         text = []
     return text
@@ -43,7 +47,7 @@ class DataManager:
         self.data['article_text_clean'] = self.data['Article text'].apply(clean_text)
     
     def article_sents(self):
-        self.data['article_text_clean'] = self.data['Article text'].apply(clean_sents)
+        self.data['article_sents_clean'] = self.data['Article text'].apply(clean_sents)
 
     def filter_cols(self):
         self.data = self.data[['Headline', 'Category', 'Article text', 'Year', 'article_text_clean']]
