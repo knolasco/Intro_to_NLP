@@ -88,7 +88,7 @@ def main():
     scraper.build_()
     scraper.find_movie_comments()
     scraper.save_json()
-    end = datetime.now())
+    end = datetime.now()
     print('Scaper end -- {}'.format(end.strftime('%m/%d/%Y, %H:%M:%S')))
     print('Time Elapsed -- {}'.format((end - now).strftime('%H:%M:%S')))
 
