@@ -72,6 +72,7 @@ class CommentScraper():
         # go through all movies in self.movies_with_id
         for movie_name, movie_id in self.movies_with_id.items():
             now = datetime.now()
+            print('===========================================\n')
             print('Scraping Commments for "{}" -- {}'.format(movie_name, now.strftime('%m/%d/%Y, %H:%M:%S')))
             self.current_movie = movie_name
             self.current_id = movie_id
@@ -79,10 +80,13 @@ class CommentScraper():
             self.pull_all_results()
             end = datetime.now()
             print('Scraping for "{}" completed -- time elapsed : {}'.format(movie_name, end -  now))
+            print('\n===========================================\n')
 
     def save_json(self):
-        with open(os.path.join('data','movie_comments.json'), 'wb') as f:
+        print('\nWriting Data into JSON.')
+        with open(os.path.join('data','movie_comments.json'), 'w') as f:
             json.dump(self.movie_list, f)
+        print('JSON file created\n')
 
 def main():
     now = datetime.now()
