@@ -40,10 +40,17 @@ class CommentScraper():
         self.youtube = build('youtube', 'v3', developerKey = self.api_key)
 
     def make_request(self):
-        self.request = self.youtube.commentThreads().list(
-            part = 'snippet',
-            videoId = self.current_id
-        )
+        if self.next_page_token:
+            self.request = self.youtube.commentThreads().list(
+                                    part = 'snippet',
+                                    videoId = self.current_id,
+                                    pageToken = self.response['nextPageToken']
+                                    )
+        else:
+            self.request = self.youtube.commentThreads().list(
+                                    part = 'snippet',
+                                    videoId = self.current_id,
+                                    )
         self.response = self.request.execute()
     
     def results_to_json(self):
@@ -56,14 +63,18 @@ class CommentScraper():
         for element in self.response['items']:
             snippet = element['snippet']['topLevelComment']['snippet']
             self.comment = snippet['textOriginal']
-            self.author = snippet['authorChannelId']['value']
+            try:
+                self.author = snippet['authorChannelId']['value']
+            except:
+                self.author = 'No Author Found'
             self.results_to_json()
 
     def pull_all_results(self):
         self.fetch_elements()
-        threshold = 50
+        threshold = 200 # so we don't exceed the request limit
         ind = 0
-        while (ind < threshold) & (self.response['nextPageToken'] is not None):
+        while (ind < threshold) & ('nextPageToken' in self.response.keys()):
+            self.next_page_token = True
             self.make_request()
             self.fetch_elements()
             ind += 1
@@ -74,6 +85,7 @@ class CommentScraper():
             now = datetime.now()
             print('===========================================\n')
             print('Scraping Commments for "{}" -- {}'.format(movie_name, now.strftime('%m/%d/%Y, %H:%M:%S')))
+            self.next_page_token = False
             self.current_movie = movie_name
             self.current_id = movie_id
             self.make_request()
