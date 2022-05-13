@@ -16,6 +16,7 @@ cycler==0.11.0
 debugpy==1.6.0
 decorator==5.1.1
 defusedxml==0.7.1
+emoji==1.7.0
 entrypoints==0.4
 executing==0.8.3
 fastjsonschema==2.15.3
@@ -93,6 +94,7 @@ soupsieve==2.3.2.post1
 SQLAlchemy==1.4.36
 stack-data==0.2.0
 terminado==0.13.3
+text2emotion==0.0.5
 textblob==0.17.1
 threadpoolctl==3.1.0
 tinycss2==1.1.1
