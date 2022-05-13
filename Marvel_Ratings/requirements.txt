@@ -76,6 +76,7 @@ python-dateutil==2.8.2
 pytz==2022.1
 pywin32==304
 pywinpty==2.0.5
+pywsd==1.2.4
 pyzmq==22.3.0
 qtconsole==5.3.0
 QtPy==2.1.0
@@ -94,6 +95,7 @@ stack-data==0.2.0
 terminado==0.13.3
 threadpoolctl==3.1.0
 tinycss2==1.1.1
+tomli==2.0.1
 tornado==6.1
 tqdm==4.64.0
 traitlets==5.1.1
@@ -102,3 +104,4 @@ urllib3==1.26.9
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.6.0
+wn==0.9.1
