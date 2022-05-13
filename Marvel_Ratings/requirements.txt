@@ -93,6 +93,7 @@ soupsieve==2.3.2.post1
 SQLAlchemy==1.4.36
 stack-data==0.2.0
 terminado==0.13.3
+textblob==0.17.1
 threadpoolctl==3.1.0
 tinycss2==1.1.1
 tomli==2.0.1
@@ -105,4 +106,5 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.6.0
 wn==0.9.1
+wordcloud==1.8.1
 wordnet==0.0.1b2
