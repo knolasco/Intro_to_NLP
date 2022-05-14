@@ -2,7 +2,7 @@
 
 ![marvel_cloud](marvel_cloud.png)
 
-- marvel_ratings.ipynb
+- [marvel_ratings.ipynb](https://github.com/knolasco/Intro_to_NLP/blob/master/Marvel_Ratings/marvel_ratings.ipynb)
 
 This jupyter notebook contains the analysis for taking the YouTube comments and using them to predict the movie ratings.
 
